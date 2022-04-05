@@ -5,25 +5,23 @@ import {
     Text,
     TouchableOpacity,
     FlatList,
-    Image,
     StyleSheet
  } from 'react-native';
 
 import { connect } from "react-redux";
-import { ScrollView } from 'react-native-gesture-handler';
-import { getGlobal } from '../stores/global/globalActions';
+import { getCap } from '../stores/cap/capActions';
 import { useSelector } from 'react-redux';
 
 import { COLORS, SIZES, FONTS} from "../constants";
 
-const MainLayout = ({ children, isTradeModalVisible, getGlobal}) => {
+const MainLayout = ({ children, isTradeModalVisible, getCap}) => {
 
     const modalAnimatedValue = React.useRef(new Animated.Value(0)).current;
 
     //Animazione del tasto MarketCap
     React.useEffect(() => {
         if(isTradeModalVisible) {
-            getGlobal()
+            getCap()
             Animated.timing(modalAnimatedValue, {
                 toValue: 1,
                 duration: 300,
@@ -36,9 +34,9 @@ const MainLayout = ({ children, isTradeModalVisible, getGlobal}) => {
                 useNativeDriver: false
             }).start();
         }
-    }, [isTradeModalVisible, getGlobal])
+    }, [isTradeModalVisible, getCap])
     
-    const data = useSelector((state) => state.globalReducer.data.total_market_cap)
+    const data = useSelector((state) => state.capReducer.data.total_market_cap)
 
     const modalY = modalAnimatedValue.interpolate({
         inputRange: [0, 1],
@@ -93,15 +91,15 @@ const MainLayout = ({ children, isTradeModalVisible, getGlobal}) => {
 
 function mapStateToProps(state) {
     return {
-        data: state.globalReducer.data,
+        data: state.capReducer.data,
         isTradeModalVisible: state.tabReducer.isTradeModalVisible,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getGlobal: () => {
-            return dispatch(getGlobal())}
+        getCap: () => {
+            return dispatch(getCap())}
     }
 }
 

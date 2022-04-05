@@ -1,4 +1,4 @@
-import * as globalActions from "./globalActions"
+import * as capActions from "./capActions"
 
 const initialState = {
     data: [],
@@ -6,19 +6,19 @@ const initialState = {
     loading: false
 }
 
-const globalReducer = (state = initialState, action) => {
+const capReducer = (state = initialState, action) => {
     switch (action.type) {
-        case globalActions.GET_GLOBAL_START:
+        case capActions.GET_CAP_START:
             return {
                 ...state,
                 loading: true
             }
-        case globalActions.GET_GLOBAL_SUCCESS:
+        case capActions.GET_CAP_SUCCESS:
             return {
                 ...state,
                 data: action.payload.data
             }
-        case globalActions.GET_GLOBAL_FAIL:
+        case capActions.GET_CAP_FAIL:
             return {
                 ...state,
                 error: action.payload.error
@@ -28,4 +28,4 @@ const globalReducer = (state = initialState, action) => {
     }
 }
 
-export default globalReducer;
+export default capReducer;
