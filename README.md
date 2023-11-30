@@ -1,2 +1,2 @@
 # CryptoVaq
- Progetto React MWT
+ React Native project to monitor cryptocurrencies
